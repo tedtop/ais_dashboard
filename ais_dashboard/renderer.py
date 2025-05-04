@@ -17,7 +17,7 @@ class AISRenderer:
     def render(self, start_date, end_date, interval_str, progress_callback=None):
         interval_map = {
             '1 Day': 24, '3 Days': 72, '5 Days': 120,
-            '7 Days': 168, '14 Days': 336, '1 Month': 720
+            '7 Days': 168, '14 Days': 366, '1 Month': 720
         }
         n_hours = interval_map.get(interval_str)
         if n_hours is None:
@@ -62,7 +62,7 @@ class AISRenderer:
             total_rows = 0
 
             for ts in hour_range:
-                y, m, d, h = ts.strftime('%Y'), ts.strftime('%m'), ts.strftime('%d'), ts.strftime('%h')
+                y, m, d, h = ts.strftime('%Y'), ts.strftime('%m'), ts.strftime('%d'), ts.strftime('%H')
                 parquet_path = os.path.join(
                     self.base_path, f'year={y}', f'month={m}', f'day={d}', f'hour={h}',
                     f'AIS_{y}_{m}_{d}_processed_hour{h}.parquet'
